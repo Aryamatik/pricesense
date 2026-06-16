@@ -36,7 +36,8 @@ WHERE price <= 1000;
 -- QUERY 1: Demand distribution across price buckets
 -- How many units sold at each price range?
 -- ------------------------------------------------
-SELECT
+CREATE OR REPLACE TABLE master_analysis AS
+SELECT *,
     CASE
         WHEN price < 10  THEN '1) $0-$9'
         WHEN price < 20  THEN '2) $10-$19'
@@ -46,7 +47,12 @@ SELECT
         WHEN price < 100 THEN '6) $75-$99'
         WHEN price < 150 THEN '7) $100-$149'
         ELSE                  '8) $150+'
-    END AS price_bucket,
+    END AS price_bucket
+FROM master
+WHERE price <= 1000;
+
+SELECT
+    price_bucket,
     COUNT(*)            AS num_transactions,
     SUM(quantity)       AS total_units_sold,
     ROUND(AVG(quantity), 2) AS avg_units_per_order,
@@ -61,16 +67,7 @@ ORDER BY price_bucket;
 -- ------------------------------------------------
 SELECT
     persona,
-    CASE
-        WHEN price < 10  THEN '1) $0-$9'
-        WHEN price < 20  THEN '2) $10-$19'
-        WHEN price < 35  THEN '3) $20-$34'
-        WHEN price < 50  THEN '4) $35-$49'
-        WHEN price < 75  THEN '5) $50-$74'
-        WHEN price < 100 THEN '6) $75-$99'
-        WHEN price < 150 THEN '7) $100-$149'
-        ELSE                  '8) $150+'
-    END AS price_bucket,
+    price_bucket,
     COUNT(*)                AS num_transactions,
     ROUND(AVG(quantity), 2) AS avg_units,
     ROUND(SUM(revenue), 2)  AS total_revenue
@@ -85,16 +82,7 @@ ORDER BY persona, price_bucket;
 -- ------------------------------------------------
 SELECT
     persona,
-    CASE
-        WHEN price < 10  THEN '1) $0-$9'
-        WHEN price < 20  THEN '2) $10-$19'
-        WHEN price < 35  THEN '3) $20-$34'
-        WHEN price < 50  THEN '4) $35-$49'
-        WHEN price < 75  THEN '5) $50-$74'
-        WHEN price < 100 THEN '6) $75-$99'
-        WHEN price < 150 THEN '7) $100-$149'
-        ELSE                  '8) $150+'
-    END AS price_bucket,
+    price_bucket,
     ROUND(SUM(revenue), 2) AS total_revenue,
     SUM(quantity)          AS total_units
 FROM master_analysis
