@@ -47,11 +47,37 @@ FROM consumer_insights;
 CREATE OR REPLACE TABLE product_clean AS
 SELECT
     product_id,
-    TRIM(LOWER(category)) AS category,
+
+    CASE
+        WHEN LOWER(TRIM(category)) = 'proten shake'
+            THEN 'protein shake'
+        ELSE LOWER(TRIM(category))
+    END AS category,
+
     claims,
     ingredient_tags,
     pack_size
+
 FROM product_metadata;
+
+
+-- Fix geography_occasion
+CREATE OR REPLACE TABLE geography_clean AS
+SELECT
+    order_id,
+
+    CASE
+        WHEN LOWER(TRIM(state)) IN ('ny','new york')
+            THEN 'New York'
+
+        WHEN LOWER(TRIM(state)) IN ('calfornia','california')
+            THEN 'California'
+
+        ELSE TRIM(state)
+    END AS state,
+
+    COALESCE(TRIM(city_tier), 'Unknown') AS city_tier, occasion
+FROM geography_occasion;
 
 
 -- Check results

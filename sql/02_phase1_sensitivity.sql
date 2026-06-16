@@ -23,7 +23,7 @@ SELECT
     p.pack_size
 FROM transactions_clean t
 LEFT JOIN consumer_clean      c ON t.user_id   = c.user_id
-LEFT JOIN geography_occasion  g ON t.order_id  = g.order_id
+LEFT JOIN geography_clean     g ON t.order_id  = g.order_id
 LEFT JOIN product_clean       p ON t.product_id = p.product_id;
 
 -- Handle outliers in the analysis layer
