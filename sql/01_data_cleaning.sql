@@ -17,21 +17,31 @@ SELECT * FROM read_csv_auto('data/product_metadata.csv');
 CREATE OR REPLACE TABLE competitor_pricing AS 
 SELECT * FROM read_csv_auto('data/competitor_pricing.csv');
 
+
 -- Remove impossible values
 CREATE OR REPLACE TABLE transactions_clean AS
-SELECT * FROM transactions
-WHERE price > 0 AND quantity > 0;
+SELECT * EXCLUDE(rn)
+FROM (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY order_id) AS rn
+    FROM transactions
+    WHERE price > 0 AND quantity > 0
+)
+WHERE rn = 1;
+
 
 -- Fix missing personas
 CREATE OR REPLACE TABLE consumer_clean AS
 SELECT
     user_id,
-    COALESCE(persona, 'unknown') AS persona,
-    trend_affinity,
+    COALESCE(LOWER(TRIM(persona)), 'unknown') AS persona,
+    LOWER(TRIM(trend_affinity)) AS trend_affinity,
     age_group,
     income_bracket,
-    COALESCE(dietary_restriction, 'None') AS dietary_restriction
+    COALESCE(LOWER(TRIM(dietary_restriction)), 'none') AS dietary_restriction
 FROM consumer_insights;
+
+
 
 -- Fix product category typos
 CREATE OR REPLACE TABLE product_clean AS
@@ -43,15 +53,8 @@ SELECT
     pack_size
 FROM product_metadata;
 
+
 -- Check results
 SELECT 'original transactions' AS label, COUNT(*) AS rows FROM transactions
 UNION ALL
 SELECT 'after cleaning', COUNT(*) FROM transactions_clean;
-
--- Find Duplicate transactions
-SELECT
-    transaction_id,
-    COUNT(*) AS duplicate_count
-FROM transactions
-GROUP BY transaction_id
-HAVING COUNT(*) > 1;
