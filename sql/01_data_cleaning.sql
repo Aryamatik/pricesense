@@ -47,3 +47,11 @@ FROM product_metadata;
 SELECT 'original transactions' AS label, COUNT(*) AS rows FROM transactions
 UNION ALL
 SELECT 'after cleaning', COUNT(*) FROM transactions_clean;
+
+-- Find Duplicate transactions
+SELECT
+    transaction_id,
+    COUNT(*) AS duplicate_count
+FROM transactions
+GROUP BY transaction_id
+HAVING COUNT(*) > 1;
