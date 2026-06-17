@@ -62,8 +62,7 @@ SELECT *,
         WHEN price < 150 THEN '7) $100-$149'
         ELSE                  '8) $150+'
     END AS price_bucket
-FROM master
-WHERE price <= 1000;
+FROM master_analysis;
 
 SELECT
     price_bucket,
