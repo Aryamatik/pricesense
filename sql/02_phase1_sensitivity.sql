@@ -28,9 +28,23 @@ LEFT JOIN product_clean       p ON t.product_id = p.product_id;
 
 -- Handle outliers in the analysis layer
 CREATE OR REPLACE TABLE master_analysis AS
-SELECT *
-FROM master
-WHERE price <= 1000;
+WITH unit_normalized AS (
+    SELECT 
+        *,
+        CASE 
+            WHEN pack_size = 'Single' THEN 1
+            WHEN pack_size = '4-Pack' THEN 4
+            WHEN pack_size = '12-Pack' THEN 12
+            ELSE 1 
+        END AS total_units_in_pack
+    FROM master
+)
+SELECT 
+    *,
+    ROUND(price / total_units_in_pack, 2) AS unit_price
+FROM unit_normalized
+-- Exclude the bugged ~500 transactions where unit price makes no retail sense
+WHERE (price / total_units_in_pack) <= 100;
 
 -- ------------------------------------------------
 -- QUERY 1: Demand distribution across price buckets

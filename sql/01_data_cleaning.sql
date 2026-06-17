@@ -23,7 +23,7 @@ CREATE OR REPLACE TABLE transactions_clean AS
 SELECT * EXCLUDE(rn)
 FROM (
     SELECT *,
-           ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY order_id) AS rn
+           ROW_NUMBER() OVER (PARTITION BY order_id, product_id ORDER BY timestamp) AS rn
     FROM transactions
     WHERE price > 0 AND quantity > 0
 )
