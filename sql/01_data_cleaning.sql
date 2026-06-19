@@ -17,70 +17,46 @@ SELECT * FROM read_csv_auto('data/product_metadata.csv');
 CREATE OR REPLACE TABLE competitor_pricing AS 
 SELECT * FROM read_csv_auto('data/competitor_pricing.csv');
 
-
 -- Remove impossible values
 CREATE OR REPLACE TABLE transactions_clean AS
-SELECT * EXCLUDE(rn)
-FROM (
-    SELECT *,
-           ROW_NUMBER() OVER (PARTITION BY order_id, product_id ORDER BY timestamp) AS rn
-    FROM transactions
-    WHERE price > 0 AND quantity > 0
-)
-WHERE rn = 1;
-
+SELECT * FROM transactions
+WHERE price > 0 AND quantity > 0;
 
 -- Fix missing personas
 CREATE OR REPLACE TABLE consumer_clean AS
 SELECT
     user_id,
-    COALESCE(LOWER(TRIM(persona)), 'unknown') AS persona,
-    LOWER(TRIM(trend_affinity)) AS trend_affinity,
+    COALESCE(persona, 'unknown') AS persona,
+    trend_affinity,
     age_group,
     income_bracket,
-    COALESCE(LOWER(TRIM(dietary_restriction)), 'none') AS dietary_restriction
+    COALESCE(dietary_restriction, 'None') AS dietary_restriction
 FROM consumer_insights;
-
-
 
 -- Fix product category typos
 CREATE OR REPLACE TABLE product_clean AS
 SELECT
     product_id,
-
-    CASE
-        WHEN LOWER(TRIM(category)) = 'proten shake'
-            THEN 'protein shake'
-        ELSE LOWER(TRIM(category))
-    END AS category,
-
+    TRIM(LOWER(category)) AS category,
     claims,
     ingredient_tags,
     pack_size
-
 FROM product_metadata;
 
-
--- Fix geography_occasion
 CREATE OR REPLACE TABLE geography_clean AS
 SELECT
     order_id,
-
-    CASE
-        WHEN LOWER(TRIM(state)) IN ('ny','new york')
-            THEN 'New York'
-
-        WHEN LOWER(TRIM(state)) IN ('calfornia','california')
-            THEN 'California'
-
-        ELSE TRIM(state)
-    END AS state,
-
-    COALESCE(TRIM(city_tier), 'Unknown') AS city_tier, occasion
-FROM geography_occasion;
-
+    TRIM(state)           AS state,
+    TRIM(city_tier)       AS city_tier,
+    TRIM(LOWER(occasion)) AS occasion
+FROM geography_occasion
+WHERE order_id IS NOT NULL;
 
 -- Check results
 SELECT 'original transactions' AS label, COUNT(*) AS rows FROM transactions
 UNION ALL
 SELECT 'after cleaning', COUNT(*) FROM transactions_clean;
+
+-- Find Duplicate transactions
+SELECT order_id, COUNT(*) FROM transactions
+GROUP BY order_id HAVING COUNT(*) > 1;
