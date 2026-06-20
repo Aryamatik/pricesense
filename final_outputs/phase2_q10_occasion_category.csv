@@ -1,0 +1,26 @@
+┌───────────────────┬───────────────────┬───────────┬─────────────┬───────────────┐
+│     occasion      │     category      │ avg_price │ total_units │ total_revenue │
+│      varchar      │      varchar      │  double   │   int128    │    double     │
+├───────────────────┼───────────────────┼───────────┼─────────────┼───────────────┤
+│ late-night        │ protein bar       │     29.33 │       12502 │     400867.53 │
+│ late-night        │ supplement        │     42.42 │        6117 │      255271.1 │
+│ late-night        │ meal replacement  │     35.56 │        7059 │     246615.81 │
+│ religious-fasting │ protein bar       │     29.33 │        7941 │     233274.18 │
+│ late-night        │ proten shake      │     36.06 │        5809 │     225264.94 │
+│ daily snack       │ protein bar       │     27.91 │        4558 │     174039.35 │
+│ daily snack       │ meal replacement  │     35.17 │        4005 │     150030.79 │
+│ religious-fasting │ meal replacement  │      35.1 │        4288 │     149049.15 │
+│ late-night        │ healthy snack     │     19.63 │        7794 │     146195.14 │
+│ festive           │ meal replacement  │     33.62 │        3256 │     128872.11 │
+│ festive           │ protein bar       │     29.46 │        4118 │     128588.27 │
+│ on-the-go         │ protein bar       │     28.55 │        5302 │     126992.72 │
+│ gym               │ proten shake      │     37.38 │        3006 │     126508.96 │
+│ road-trip         │ protein bar       │     27.93 │        4175 │      123514.3 │
+│ religious-fasting │ supplement        │     43.63 │        3338 │     123054.43 │
+│ marathon-prep     │ protein bar       │     28.56 │        4731 │     122562.29 │
+│ on-the-go         │ meal replacement  │     35.37 │        2573 │     117390.59 │
+│ late-night        │ electrolyte drink │     22.03 │        5406 │     112322.79 │
+│ marathon-prep     │ supplement        │     41.87 │        2201 │     110470.01 │
+│ gym               │ protein bar       │     28.39 │        4152 │     108540.68 │
+└───────────────────┴───────────────────┴───────────┴─────────────┴───────────────┘
+  20 rows                                                               5 columns

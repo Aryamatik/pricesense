@@ -1,0 +1,21 @@
+┌─────────┬───────────────────┬───────────┬───────────────┬─────────────┐
+│ persona │     occasion      │ avg_price │ total_revenue │ total_units │
+│ varchar │      varchar      │  double   │    double     │   int128    │
+├─────────┼───────────────────┼───────────┼───────────────┼─────────────┤
+│ budget  │ late-night        │     30.77 │     386050.68 │       11332 │
+│ fitness │ late-night        │     31.03 │     378810.62 │       12440 │
+│ casual  │ late-night        │     30.25 │     365444.61 │       11577 │
+│ premium │ late-night        │     30.35 │     353354.91 │       12586 │
+│ casual  │ religious-fasting │     31.35 │     251125.74 │        7196 │
+│ premium │ religious-fasting │     31.47 │     222638.54 │        6658 │
+│ casual  │ daily snack       │     28.69 │      174415.9 │        4273 │
+│ fitness │ festive           │     28.98 │     168784.27 │        5666 │
+│ budget  │ religious-fasting │     31.48 │      167968.2 │        5681 │
+│ budget  │ daily snack       │     30.35 │      166266.5 │        6271 │
+│ fitness │ religious-fasting │     29.52 │     161660.71 │        6229 │
+│ budget  │ on-the-go         │     29.97 │     157975.79 │        5185 │
+│ fitness │ road-trip         │     29.97 │     156697.02 │        4922 │
+│ budget  │ gym               │     29.58 │      156563.8 │        4453 │
+│ casual  │ festive           │     30.07 │     154627.63 │        4329 │
+└─────────┴───────────────────┴───────────┴───────────────┴─────────────┘
+  15 rows                                                     5 columns
