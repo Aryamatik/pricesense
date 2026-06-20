@@ -2,6 +2,6 @@
 │    source    │ avg_price │ min_price │ max_price │
 │   varchar    │  double   │  double   │  double   │
 ├──────────────┼───────────┼───────────┼───────────┤
-│ Our products │     30.34 │      2.81 │     226.9 │
+│ Our products │     30.35 │      2.81 │     226.9 │
 │ Competitors  │     30.66 │      9.66 │     59.18 │
 └──────────────┴───────────┴───────────┴───────────┘

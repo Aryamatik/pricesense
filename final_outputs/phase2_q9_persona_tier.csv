@@ -2,25 +2,25 @@
 │ city_tier │ persona │ avg_price │ total_revenue │
 │  varchar  │ varchar │  double   │    double     │
 ├───────────┼─────────┼───────────┼───────────────┤
-│ Tier 1    │ budget  │     31.37 │     613582.66 │
-│ Tier 1    │ casual  │     31.18 │     520051.48 │
-│ Tier 1    │ fitness │     30.92 │     491444.38 │
-│ Tier 1    │ premium │     30.91 │     463523.74 │
-│ Tier 2    │ fitness │     31.57 │      447157.5 │
-│ Tier 2    │ premium │     30.94 │     421148.69 │
-│ Tier 2    │ casual  │      31.6 │     394507.06 │
-│ Tier 2    │ budget  │     30.89 │     379818.04 │
-│ Tier 3    │ casual  │     26.86 │     352655.87 │
-│ Tier 3    │ fitness │     27.41 │     296118.47 │
-│ Tier 3    │ budget  │     27.33 │     267725.26 │
-│ Unknown   │ premium │     30.74 │     215489.52 │
-│ Tier 3    │ premium │     27.67 │     211451.87 │
-│ Unknown   │ casual  │     31.71 │     152142.09 │
-│ Unknown   │ fitness │     30.55 │     134068.57 │
-│ Tier 1    │ unknown │     31.34 │     132431.18 │
+│ Tier 1    │ budget  │     31.39 │     612941.76 │
+│ Tier 1    │ casual  │     31.17 │     519000.37 │
+│ Tier 1    │ fitness │     30.95 │      490851.1 │
+│ Tier 1    │ premium │     30.86 │     462393.88 │
+│ Tier 2    │ fitness │     31.59 │     446681.25 │
+│ Tier 2    │ premium │     30.92 │     420603.08 │
+│ Tier 2    │ casual  │     31.66 │     394212.33 │
+│ Tier 2    │ budget  │     30.89 │     379391.98 │
+│ Tier 3    │ casual  │      26.9 │     352439.84 │
+│ Tier 3    │ fitness │     27.47 │     295858.89 │
+│ Tier 3    │ budget  │     27.35 │     267573.68 │
+│ Unknown   │ premium │     30.82 │     215360.83 │
+│ Tier 3    │ premium │     27.65 │     211214.34 │
+│ Unknown   │ casual  │     31.75 │     152000.78 │
+│ Unknown   │ fitness │     30.55 │     133938.26 │
+│ Tier 1    │ unknown │     31.37 │     132282.88 │
 │ Unknown   │ budget  │     30.75 │     129709.56 │
-│ Tier 2    │ unknown │      30.6 │     129368.56 │
-│ Tier 3    │ unknown │     26.77 │       44701.9 │
-│ Unknown   │ unknown │     30.36 │      17495.46 │
+│ Tier 2    │ unknown │     30.32 │     128661.75 │
+│ Tier 3    │ unknown │     26.79 │       44687.4 │
+│ Unknown   │ unknown │     30.42 │      17442.33 │
 └───────────┴─────────┴───────────┴───────────────┘
   20 rows                               4 columns

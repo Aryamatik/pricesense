@@ -46,4 +46,4 @@
 │ ORD003361 │ U03888  │ P096       │  21.74 │        3 │ 2026-02-01 12:07:04.822715 │ Marketplace │
 │ ORD010923 │ U00649  │ P072       │  48.62 │        1 │ 2025-09-12 00:07:04.822715 │ Retail      │
 └───────────┴─────────┴────────────┴────────┴──────────┴────────────────────────────┴─────────────┘
-  48834 rows (40 shown)                 use .last to show entire result                 7 columns
+  48688 rows (40 shown)                 use .last to show entire result                 7 columns

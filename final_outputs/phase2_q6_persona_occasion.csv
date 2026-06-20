@@ -2,20 +2,20 @@
 │ persona │     occasion      │ avg_price │ total_revenue │ total_units │
 │ varchar │      varchar      │  double   │    double     │   int128    │
 ├─────────┼───────────────────┼───────────┼───────────────┼─────────────┤
-│ budget  │ late-night        │     30.77 │     386050.68 │       11332 │
-│ fitness │ late-night        │     31.03 │     378810.62 │       12440 │
-│ casual  │ late-night        │     30.25 │     365444.61 │       11577 │
-│ premium │ late-night        │     30.35 │     353354.91 │       12586 │
-│ casual  │ religious-fasting │     31.35 │     251125.74 │        7196 │
-│ premium │ religious-fasting │     31.47 │     222638.54 │        6658 │
-│ casual  │ daily snack       │     28.69 │      174415.9 │        4273 │
+│ budget  │ late-night        │      30.8 │     385724.64 │       11318 │
+│ fitness │ late-night        │     31.06 │      378457.8 │       12416 │
+│ casual  │ late-night        │     30.22 │     364462.02 │       11552 │
+│ premium │ late-night        │     30.26 │     352616.27 │       12575 │
+│ casual  │ religious-fasting │     31.39 │      251007.5 │        7190 │
+│ premium │ religious-fasting │     31.53 │     222587.45 │        6651 │
+│ casual  │ daily snack       │     28.74 │      174319.1 │        4264 │
 │ fitness │ festive           │     28.98 │     168784.27 │        5666 │
-│ budget  │ religious-fasting │     31.48 │      167968.2 │        5681 │
-│ budget  │ daily snack       │     30.35 │      166266.5 │        6271 │
-│ fitness │ religious-fasting │     29.52 │     161660.71 │        6229 │
-│ budget  │ on-the-go         │     29.97 │     157975.79 │        5185 │
-│ fitness │ road-trip         │     29.97 │     156697.02 │        4922 │
-│ budget  │ gym               │     29.58 │      156563.8 │        4453 │
-│ casual  │ festive           │     30.07 │     154627.63 │        4329 │
+│ budget  │ religious-fasting │     31.46 │     167632.61 │        5673 │
+│ budget  │ daily snack       │     30.37 │     166259.91 │        6270 │
+│ fitness │ religious-fasting │     29.58 │     161381.23 │        6211 │
+│ budget  │ on-the-go         │     30.01 │     157928.08 │        5180 │
+│ fitness │ road-trip         │     30.01 │     156401.84 │        4909 │
+│ budget  │ gym               │     29.59 │     156327.58 │        4445 │
+│ casual  │ festive           │     30.13 │      154381.4 │        4313 │
 └─────────┴───────────────────┴───────────┴───────────────┴─────────────┘
   15 rows                                                     5 columns

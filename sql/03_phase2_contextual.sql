@@ -70,10 +70,16 @@ ORDER BY avg_price DESC;
 -- QUERY 5: Competitor pricing comparison
 -- How do our prices compare to competitors?
 -- ------------------------------------------------
-SELECT
-    ROUND(AVG(price),2) AS avg_competitor_price,
-    ROUND(MIN(price),2) AS min_competitor_price,
-    ROUND(MAX(price),2) AS max_competitor_price
+SELECT 'Our products' AS source,
+    ROUND(AVG(price),2) AS avg_price,
+    ROUND(MIN(price),2) AS min_price,
+    ROUND(MAX(price),2) AS max_price
+FROM master_analysis
+UNION ALL
+SELECT 'Competitors' AS source,
+    ROUND(AVG(price),2) AS avg_price,
+    ROUND(MIN(price),2) AS min_price,
+    ROUND(MAX(price),2) AS max_price
 FROM competitor_pricing
 WHERE price IS NOT NULL;
 
