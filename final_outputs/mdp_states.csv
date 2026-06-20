@@ -1,0 +1,49 @@
+┌─────────┬───────────┬───────────────────┬────────────┬──────────────────┬─────────────┬───────────┬──────────────┬────────────┐
+│ persona │ city_tier │     occasion      │ price_band │ num_transactions │ total_units │ avg_price │ total_reward │ avg_reward │
+│ varchar │  varchar  │      varchar      │   double   │      int64       │   int128    │  double   │    double    │   double   │
+├─────────┼───────────┼───────────────────┼────────────┼──────────────────┼─────────────┼───────────┼──────────────┼────────────┤
+│ premium │ Tier 1    │ daily snack       │       10.0 │              137 │         685 │      14.0 │       9928.4 │      72.47 │
+│ casual  │ Tier 2    │ gym               │       10.0 │              152 │         319 │     14.45 │      4572.93 │      30.09 │
+│ casual  │ Tier 1    │ daily snack       │       40.0 │               13 │          24 │     47.46 │      1140.04 │       87.7 │
+│ premium │ Tier 1    │ late-night        │      140.0 │               37 │          69 │    144.63 │      9992.67 │     270.07 │
+│ casual  │ Tier 1    │ festive           │       30.0 │               19 │          37 │      33.5 │      1238.39 │      65.18 │
+│ fitness │ Tier 3    │ on-the-go         │       10.0 │               83 │         174 │     13.83 │      2428.92 │      29.26 │
+│ premium │ Tier 2    │ on-the-go         │       10.0 │              137 │         479 │     13.82 │      6189.35 │      45.18 │
+│ budget  │ Tier 3    │ religious-fasting │       30.0 │               27 │          65 │     34.37 │      2221.31 │      82.27 │
+│ budget  │ Tier 3    │ gym               │       10.0 │               83 │         435 │     15.03 │      7394.17 │      89.09 │
+│ casual  │ Tier 2    │ religious-fasting │       40.0 │               36 │          71 │     44.97 │      3191.04 │      88.64 │
+│ unknown │ Tier 3    │ religious-fasting │       20.0 │               15 │          30 │     23.61 │       713.77 │      47.58 │
+│ premium │ Tier 1    │ gym               │       10.0 │              115 │         446 │     14.12 │      5663.35 │      49.25 │
+│ premium │ Tier 1    │ festive           │        0.0 │               65 │         146 │      7.75 │      1128.89 │      17.37 │
+│ fitness │ Tier 3    │ daily snack       │        0.0 │               51 │         130 │      7.89 │       1004.3 │      19.69 │
+│ premium │ Tier 2    │ daily snack       │       10.0 │              165 │        1097 │     14.58 │     14438.58 │      87.51 │
+│ casual  │ Tier 1    │ marathon-prep     │       20.0 │               35 │          72 │     23.76 │       1737.4 │      49.64 │
+│ casual  │ Tier 1    │ late-night        │       30.0 │              144 │         534 │     34.27 │     19004.49 │     131.98 │
+│ casual  │ Tier 2    │ daily snack       │       10.0 │              169 │         559 │     13.84 │      7375.37 │      43.64 │
+│ fitness │ Tier 2    │ late-night        │       10.0 │              134 │         568 │     14.21 │      7056.33 │      52.66 │
+│ premium │ Tier 2    │ religious-fasting │        0.0 │               98 │         805 │      7.92 │      6903.95 │      70.45 │
+│   ·     │   ·       │         ·         │         ·  │                · │           · │        ·  │          ·   │        ·   │
+│   ·     │   ·       │         ·         │         ·  │                · │           · │        ·  │          ·   │        ·   │
+│   ·     │   ·       │         ·         │         ·  │                · │           · │        ·  │          ·   │        ·   │
+│ casual  │ Tier 1    │ religious-fasting │       50.0 │                8 │          14 │     54.56 │       765.39 │      95.67 │
+│ casual  │ Tier 2    │ late-night        │      140.0 │                6 │         240 │    144.59 │     33764.24 │    5627.37 │
+│ unknown │ Tier 2    │ road-trip         │       50.0 │                5 │          15 │     54.26 │       811.89 │     162.38 │
+│ casual  │ Tier 2    │ religious-fasting │      110.0 │                7 │          20 │     115.3 │      2295.39 │     327.91 │
+│ fitness │ Tier 2    │ religious-fasting │      140.0 │                9 │          13 │    144.52 │       1874.4 │     208.27 │
+│ premium │ Tier 2    │ religious-fasting │      140.0 │               14 │         266 │    145.26 │     38475.24 │    2748.23 │
+│ unknown │ Tier 2    │ late-night        │       20.0 │                8 │          15 │     23.14 │       338.96 │      42.37 │
+│ fitness │ Tier 1    │ festive           │       50.0 │               12 │          29 │     54.09 │      1551.61 │      129.3 │
+│ casual  │ Tier 3    │ daily snack       │       40.0 │               15 │          33 │     43.41 │      1437.46 │      95.83 │
+│ casual  │ Tier 2    │ marathon-prep     │       60.0 │               10 │          20 │     65.95 │      1315.42 │     131.54 │
+│ budget  │ Tier 3    │ on-the-go         │       80.0 │                5 │          20 │     84.79 │      1694.17 │     338.83 │
+│ premium │ Tier 2    │ road-trip         │       70.0 │                5 │           9 │     75.93 │       690.68 │     138.14 │
+│ casual  │ Tier 2    │ on-the-go         │       60.0 │               10 │          19 │     62.92 │      1187.77 │     118.78 │
+│ budget  │ Unknown   │ road-trip         │       60.0 │                5 │           7 │     66.92 │       466.56 │      93.31 │
+│ premium │ Tier 2    │ religious-fasting │      110.0 │               10 │          26 │    115.66 │      3019.58 │     301.96 │
+│ unknown │ Tier 3    │ religious-fasting │       30.0 │                5 │          15 │      37.1 │       558.64 │     111.73 │
+│ unknown │ Unknown   │ marathon-prep     │        0.0 │                6 │          15 │      7.86 │       128.73 │      21.46 │
+│ casual  │ Tier 1    │ road-trip         │       70.0 │                6 │          11 │     76.99 │       846.01 │      141.0 │
+│ budget  │ Tier 2    │ on-the-go         │       70.0 │               10 │          18 │     74.44 │      1328.78 │     132.88 │
+│ fitness │ Tier 1    │ on-the-go         │      120.0 │                7 │          13 │    124.06 │       1617.1 │     231.01 │
+└─────────┴───────────┴───────────────────┴────────────┴──────────────────┴─────────────┴───────────┴──────────────┴────────────┘
+  1258 rows (40 shown)                                use .last to show entire result                                 9 columns

@@ -75,32 +75,44 @@ ORDER BY avg_price DESC
 LIMIT 20;
 
 
--- QUERY 7: Executive Recommendations
+-- QUERY 7: Data-driven recommendations
 
-SELECT
-    'Price Strategy' AS recommendation_type,
-    'Focus pricing around the highest revenue price bands' AS recommendation
+-- Best occasion by revenue
+SELECT 'Top occasion' AS insight,
+    occasion AS value,
+    ROUND(SUM(revenue),2) AS total_revenue
+FROM master_analysis
+WHERE occasion IS NOT NULL
+GROUP BY occasion
+ORDER BY total_revenue DESC
+LIMIT 1;
 
-UNION ALL
+-- Best city tier by avg price
+SELECT 'Highest paying city tier' AS insight,
+    city_tier AS value,
+    ROUND(AVG(price),2) AS total_revenue
+FROM master_analysis
+WHERE city_tier IS NOT NULL
+GROUP BY city_tier
+ORDER BY total_revenue DESC
+LIMIT 1;
 
-SELECT
-    'Occasion Strategy',
-    'Prioritize late-night and religious-fasting campaigns'
+-- Best category by revenue
+SELECT 'Top category' AS insight,
+    category AS value,
+    ROUND(SUM(revenue),2) AS total_revenue
+FROM master_analysis
+WHERE category IS NOT NULL
+GROUP BY category
+ORDER BY total_revenue DESC
+LIMIT 1;
 
-UNION ALL
-
-SELECT
-    'Geographic Strategy',
-    'Maintain premium pricing in Tier 1 cities'
-
-UNION ALL
-
-SELECT
-    'Category Strategy',
-    'Expand protein bars, protein shakes and supplements'
-
-UNION ALL
-
-SELECT
-    'Product Claims',
-    'Promote high-protein, low-sugar and keto-friendly products';
+-- Best claim by avg price
+SELECT 'Highest priced claim' AS insight,
+    claims AS value,
+    ROUND(AVG(price),2) AS total_revenue
+FROM master_analysis
+WHERE claims IS NOT NULL
+GROUP BY claims
+ORDER BY total_revenue DESC
+LIMIT 1;
