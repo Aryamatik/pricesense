@@ -64,16 +64,22 @@ ORDER BY total_revenue DESC;
 
 -- QUERY 6: Premium Product Claims
 
+WITH split_claims AS (
+    SELECT 
+        *,
+        -- Split the string by comma and expand elements into individual lines
+        TRIM(UNNEST(STRING_SPLIT(claims, ','))) AS individual_claim
+    FROM master_analysis
+    WHERE claims IS NOT NULL
+)
 SELECT
-    claims,
-    ROUND(AVG(price),2) AS avg_price,
-    ROUND(SUM(revenue),2) AS total_revenue
-FROM master_analysis
-WHERE claims IS NOT NULL
-GROUP BY claims
+    individual_claim        AS claims,
+    ROUND(AVG(price), 2)    AS avg_price,
+    ROUND(SUM(revenue), 2)  AS total_revenue
+FROM split_claims
+GROUP BY individual_claim
 ORDER BY avg_price DESC
 LIMIT 20;
-
 
 -- QUERY 7: Data-driven recommendations
 
@@ -90,11 +96,11 @@ LIMIT 1;
 -- Best city tier by avg price
 SELECT 'Highest paying city tier' AS insight,
     city_tier AS value,
-    ROUND(AVG(price),2) AS total_revenue
+    ROUND(AVG(price),2) AS Avg_revenue
 FROM master_analysis
 WHERE city_tier IS NOT NULL
 GROUP BY city_tier
-ORDER BY total_revenue DESC
+ORDER BY Avg_revenue DESC
 LIMIT 1;
 
 -- Best category by revenue
@@ -108,11 +114,17 @@ ORDER BY total_revenue DESC
 LIMIT 1;
 
 -- Best claim by avg price
+WITH split_claims AS (
+    SELECT 
+        *,
+        TRIM(UNNEST(STRING_SPLIT(claims, ','))) AS individual_claim
+    FROM master_analysis
+    WHERE claims IS NOT NULL
+)
 SELECT 'Highest priced claim' AS insight,
-    claims AS value,
-    ROUND(AVG(price),2) AS total_revenue
-FROM master_analysis
-WHERE claims IS NOT NULL
-GROUP BY claims
-ORDER BY total_revenue DESC
+    individual_claim AS value,
+    ROUND(AVG(price),2) AS highest_avg_price
+FROM split_claims
+GROUP BY individual_claim
+ORDER BY highest_avg_price DESC
 LIMIT 1;

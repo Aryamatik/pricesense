@@ -55,15 +55,22 @@ ORDER BY avg_price DESC;
 -- QUERY 4: Do trend claims justify higher prices?
 -- Compare avg price of products with vs without claims
 -- ------------------------------------------------
+WITH split_claims AS (
+    SELECT 
+        *,
+        -- Split string by comma and expand array elements into distinct rows
+        TRIM(UNNEST(STRING_SPLIT(claims, ','))) AS individual_claim
+    FROM master_analysis
+    WHERE claims IS NOT NULL
+)
 SELECT
-    claims,
+    individual_claim            AS product_claim,
     COUNT(*)                    AS num_transactions,
     ROUND(AVG(price), 2)        AS avg_price,
     SUM(quantity)               AS total_units,
     ROUND(SUM(revenue), 2)      AS total_revenue
-FROM master_analysis
-WHERE claims IS NOT NULL
-GROUP BY claims
+FROM split_claims
+GROUP BY individual_claim
 ORDER BY avg_price DESC;
 
 -- ------------------------------------------------

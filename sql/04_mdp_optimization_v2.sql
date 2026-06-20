@@ -56,92 +56,108 @@ FROM with_lag;
 -- -----------------------------------------------
 CREATE OR REPLACE TABLE mdp_values AS
 WITH iter0 AS (
-    -- Iteration 0: V(s) = R(s) immediate reward only
-    SELECT
-        persona, city_tier, occasion, price_band,
+    SELECT 
+        persona, 
+        city_tier, 
+        occasion, 
+        price_band, 
         avg_reward,
-        avg_reward AS state_value,
+        avg_reward AS state_value, 
         0 AS iteration
     FROM mdp_states
 ),
 iter1 AS (
-    -- Iteration 1: V(s) = R(s) + 0.9 * max(V previous)
-    SELECT
-        s.persona, s.city_tier, s.occasion, s.price_band,
-        s.avg_reward,
-        ROUND(s.avg_reward + 0.9 * (
-            SELECT MAX(i.state_value)
-            FROM iter0 i
-            WHERE i.persona   = s.persona
-              AND i.city_tier = s.city_tier
-              AND i.occasion  = s.occasion
-        ), 2) AS state_value,
+    SELECT 
+        t.persona, 
+        t.city_tier, 
+        t.occasion, 
+        t.price_band, 
+        t.avg_reward,
+        ROUND(t.avg_reward + 0.9 * COALESCE(prev.state_value * (1.0 + t.transition_prob), 0), 2) AS state_value,
         1 AS iteration
-    FROM mdp_states s
+    FROM mdp_transitions t
+    LEFT JOIN iter0 prev 
+      ON t.persona = prev.persona 
+     AND t.city_tier = prev.city_tier 
+     AND t.occasion = prev.occasion
+     AND t.price_band = prev.price_band
 ),
 iter2 AS (
-    SELECT
-        s.persona, s.city_tier, s.occasion, s.price_band,
-        s.avg_reward,
-        ROUND(s.avg_reward + 0.9 * (
-            SELECT MAX(i.state_value)
-            FROM iter1 i
-            WHERE i.persona   = s.persona
-              AND i.city_tier = s.city_tier
-              AND i.occasion  = s.occasion
-        ), 2) AS state_value,
+    SELECT 
+        t.persona, 
+        t.city_tier, 
+        t.occasion, 
+        t.price_band, 
+        t.avg_reward,
+        ROUND(t.avg_reward + 0.9 * COALESCE(prev.state_value * (1.0 + t.transition_prob), 0), 2) AS state_value,
         2 AS iteration
-    FROM mdp_states s
+    FROM mdp_transitions t
+    LEFT JOIN iter1 prev 
+      ON t.persona = prev.persona 
+     AND t.city_tier = prev.city_tier 
+     AND t.occasion = prev.occasion
+     AND t.price_band = prev.price_band
 ),
 iter3 AS (
-    SELECT
-        s.persona, s.city_tier, s.occasion, s.price_band,
-        s.avg_reward,
-        ROUND(s.avg_reward + 0.9 * (
-            SELECT MAX(i.state_value)
-            FROM iter2 i
-            WHERE i.persona   = s.persona
-              AND i.city_tier = s.city_tier
-              AND i.occasion  = s.occasion
-        ), 2) AS state_value,
+    SELECT 
+        t.persona, 
+        t.city_tier, 
+        t.occasion, 
+        t.price_band, 
+        t.avg_reward,
+        ROUND(t.avg_reward + 0.9 * COALESCE(prev.state_value * (1.0 + t.transition_prob), 0), 2) AS state_value,
         3 AS iteration
-    FROM mdp_states s
+    FROM mdp_transitions t
+    LEFT JOIN iter2 prev 
+      ON t.persona = prev.persona 
+     AND t.city_tier = prev.city_tier 
+     AND t.occasion = prev.occasion
+     AND t.price_band = prev.price_band
 ),
 iter4 AS (
-    SELECT
-        s.persona, s.city_tier, s.occasion, s.price_band,
-        s.avg_reward,
-        ROUND(s.avg_reward + 0.9 * (
-            SELECT MAX(i.state_value)
-            FROM iter3 i
-            WHERE i.persona   = s.persona
-              AND i.city_tier = s.city_tier
-              AND i.occasion  = s.occasion
-        ), 2) AS state_value,
+    SELECT 
+        t.persona, 
+        t.city_tier, 
+        t.occasion, 
+        t.price_band, 
+        t.avg_reward,
+        ROUND(t.avg_reward + 0.9 * COALESCE(prev.state_value * (1.0 + t.transition_prob), 0), 2) AS state_value,
         4 AS iteration
-    FROM mdp_states s
+    FROM mdp_transitions t
+    LEFT JOIN iter3 prev 
+      ON t.persona = prev.persona 
+     AND t.city_tier = prev.city_tier 
+     AND t.occasion = prev.occasion
+     AND t.price_band = prev.price_band
 ),
 iter5 AS (
-    SELECT
-        s.persona, s.city_tier, s.occasion, s.price_band,
-        s.avg_reward,
-        ROUND(s.avg_reward + 0.9 * (
-            SELECT MAX(i.state_value)
-            FROM iter4 i
-            WHERE i.persona   = s.persona
-              AND i.city_tier = s.city_tier
-              AND i.occasion  = s.occasion
-        ), 2) AS state_value,
+    SELECT 
+        t.persona, 
+        t.city_tier, 
+        t.occasion, 
+        t.price_band, 
+        t.avg_reward,
+        ROUND(t.avg_reward + 0.9 * COALESCE(prev.state_value * (1.0 + t.transition_prob), 0), 2) AS state_value,
         5 AS iteration
-    FROM mdp_states s
+    FROM mdp_transitions t
+    LEFT JOIN iter4 prev 
+      ON t.persona = prev.persona 
+     AND t.city_tier = prev.city_tier 
+     AND t.occasion = prev.occasion
+     AND t.price_band = prev.price_band
 )
--- Combine all iterations for comparison
-SELECT * FROM iter0
-UNION ALL SELECT * FROM iter1
-UNION ALL SELECT * FROM iter2
-UNION ALL SELECT * FROM iter3
-UNION ALL SELECT * FROM iter4
-UNION ALL SELECT * FROM iter5;
+-- Combine all iteration sweeps into a single reference matrix
+SELECT * FROM iter0 
+UNION ALL 
+SELECT * FROM iter1 
+UNION ALL 
+SELECT * FROM iter2
+UNION ALL 
+SELECT * FROM iter3
+UNION ALL 
+SELECT * FROM iter4
+UNION ALL 
+SELECT * FROM iter5;
 
 -- -----------------------------------------------
 -- STEP 4: Extract Optimal Policy
